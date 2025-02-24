@@ -3,6 +3,8 @@ package com.bridgelabz.greetingapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/greeting")
 public class GreetingControler {
@@ -27,5 +29,9 @@ public class GreetingControler {
     @PostMapping("/save")
     public Greeting saveGreeting(@RequestBody Greeting greeting) {
         return greetingServices.saveGreeting(greeting);
+    }
+    @GetMapping("/find/{id}")
+    public Optional<Greeting> findGreetingById(@PathVariable Long id) {
+        return greetingServices.findGreetingById(id);
     }
 }
