@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+.idea
+.gitattributes
+.mvn
+pom.xml
+HELP.md
+mvnw.cmd

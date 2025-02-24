@@ -1,28 +1,31 @@
 package com.bridgelabz.greetingapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping ("/greeting")
+@RequestMapping("/greeting")
 public class GreetingControler {
+
     @Autowired
-    private GreetingServices greetingServices ;
+    private GreetingServices greetingServices;
+
     @GetMapping("/hello")
-    public String sayHello(){
-        return " Hello World!";
+    public String sayHello() {
+        return "Hello, World!";
     }
-    @GetMapping("/services")
-    public String sayHelloFromServices(){
-        return GreetingServices.getServiceMessage();
-    }
-    @GetMapping("/personalizes")
-    public String personalizedGreeting(@RequestParam(required = false) String firstName,
-                                       @RequestParam(required= false) String lastName){
-        return GreetingServices.getPesonalizedGreeting(firstName,lastName);
+    @GetMapping("/service")
+    public String sayHelloFromService() {
+        return greetingServices.getGreetingMessage();
     }
 
+    @GetMapping("/personalized")
+    public String personalizedGreeting(@RequestParam(required = false) String firstName,
+                                       @RequestParam(required = false) String lastName) {
+        return greetingServices.getPersonalizedGreeting(firstName, lastName);
+    }
+    @PostMapping("/save")
+    public Greeting saveGreeting(@RequestBody Greeting greeting) {
+        return greetingServices.saveGreeting(greeting);
+    }
 }
